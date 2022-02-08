@@ -1,0 +1,66 @@
+body {
+  background-color: #4dc9ff;
+}
+#container {
+  display: flex;
+  justify-content: center;
+}
+#main-box {
+  background-color: white;
+  height: 50%;
+  width: 50%;
+  margin-top: 20px;
+  position: fixed;
+  border-radius: 20px;
+  display:block;
+}
+
+#littlep {
+  color: black;
+  font-family: "Monaco", "Courier New";
+  text-align: center;
+  height: 1em;
+}
+#display_box_title{
+	background-color:yellow;
+	position: relative;
+	margin-top: 20px;
+	margin-left: 5px;
+	display:block;
+}
+h2{
+	color: black;
+  	font-family: "Monaco", "Courier New";
+  	height:1em;
+}
+
+#display_box{
+	background-color: blueviolet;
+	position:relative;
+	display: inline-block;
+	height:50%;
+	width: 80%;
+	margin-right:5px;
+	margin-bottom:50px;
+}
+
+button {
+	background-color:#f5ab5d;
+	color:white;
+	padding: 15px 32px 15px;
+	padding-bottom: 20px;
+	text-align: center;
+	border:none;
+	cursor:pointer;
+	font-family: courier;
+	border-radius:10px;
+	height:3em;
+	border-bottom-style:solid;
+	border-right-style:solid;
+	border-color: #946e46
+}
+
+/*#people_table {
+	display:none;
+}*/
+
