@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel ="stylesheet" href="index.css">
+		<link rel ="icon" href="test2.png">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<title> Finances </title>
+	</head>
+	<body>
+		<div id="container">
+			<div id="main-box" class="main-box">
+				<h1 id="littlep">Budget Database</h1>
+				<div id="display_box_title">
+					<h2>People</h2>
+				</div>
+				<div id="display_box"><p id="filler" style="text-align:center;">this is the p tag in displaybox</p>
+					<table id="people_table">
+						<thead>
+							<tr>
+								<th>Person ID</th>
+								<th>Firstname</th>
+								<th>Lastname</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+				<div id="buttons">
+					<button id="getPeopleButton" onclick="getPeoplePutTable">Get All People </button>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		function getPeoplePutTable(){
+			button = document.getElementById('getPeopleButton');
+			document.getElementById('filler').innerText('ay yo');
+		};
+		function addToPeopleTable(person){
+			let stringToAdd = '<tr><td>' + person.pid +'</td><td>'  + person.fn + '</td><td>'+ person.ln +'</td>/tr>';
+			$("#people_table > tbody:last-child").append(stringToAdd);
+		}
+		$(document).ready(function(){
+			Url="http://localhost:8080/";
+			$("#getPeopleButton").click(function(){
+				//alert("I'm alerting you'");
+				//$("#filler").text("the button has been pushed");
+				var testString1 = "1";
+				var testStringfn = "larry";
+				var testStringln = "johnson";
+				var testStringWhole = '<tr><td>' + testString1 +'</td><td>testString2</td><td>testString3</td>/tr>';
+				$("#filler").hide();
+				//$("#people_table > tbody:last-child").append(testStringWhole);
+				/*$.get(Url, function(data, status){
+					console.log(data);
+				});*/
+				$.get(Url + "getAllPersons", function(data,status){
+					console.log(data);
+					var jsonString = data.slice(1,data.length-1);
+					console.log(jsonString);
+					console.log(jsonString.indexOf("}"));
+					var jsonArray = [];
+					//var index = 0;
+					var beginning = 0;
+					while (beginning > -1) {
+						index = jsonString.indexOf("}");
+						nextSegment = jsonString.slice(beginning, index + 1);
+						jsonArray.push(nextSegment);
+						jsonString = jsonString.slice(index+1, jsonString.length);
+						console.log(jsonString.indexOf("{"));
+						beginning = jsonString.indexOf("{");
+					}
+					console.log(jsonArray);
+					//var jsPersonList = jsPersonListString.split(",");
+					for (let i = 0; i < jsonArray.length; i++){
+						addToPeopleTable(JSON.parse(jsonArray[i]));
+					}
+				}, "text")
+				//$('#people_table').show();
+			});
+			
+		})
+	</script>
+</html>
